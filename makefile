@@ -5,7 +5,7 @@
 
 HOST != sh build-aux/config.guess
 
-GENIE=../bx/tools/bin/$(OS)/genie
+GENIE = ./tools/bin/$(OS)/genie
 
 all:
 	$(GENIE)                       vs2017
@@ -236,7 +236,7 @@ tools/bin/$(OS)/lempar.c: tools/lemon/lempar.c
 
 lemon: tools/bin/$(OS)/lemon$(EXE) tools/bin/$(OS)/lempar.c
 
-tools: bin2c lemon
+tools: bin2c lemon $(GENIE)
 
 dist: tools/bin/darwin/bin2c tools/bin/linux/bin2c tools/bin/windows/bin2c.exe tools/bin/haiku/bin2c
 
@@ -244,3 +244,8 @@ dist: tools/bin/darwin/bin2c tools/bin/linux/bin2c tools/bin/windows/bin2c.exe t
 	$(SILENT) $(MAKE) -C .build/projects/$(BUILD_PROJECT_DIR) bx.test config=$(BUILD_TOOLS_CONFIG)
 
 test: .build/$(BUILD_OUTPUT_DIR)/bin/bx.testRelease$(EXE)
+
+# genie
+$(GENIE):
+	$(SILENT) $(MAKE) -C GENie
+	$(SILENT) install -D GENie/bin/*/genie $@

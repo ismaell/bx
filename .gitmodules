@@ -1,0 +1,3 @@
+[submodule "GENie"]
+	path = GENie
+	url = https://github.com/bkaradzic/GENie
